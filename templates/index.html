@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Size Input</title>
+</head>
+<body>
+    <h2>Enter a number between 5 and 10:</h2>
+    <form method="POST" action="/generate_square">
+        <label for="n">n (5 to 9):</label>
+        <input type="number" id="n" name="n" min="5" max="9" required>
+        <button type="submit">Generate Grid</button>
+    </form>
+
+    <p>Click on a cell to set:</p>
+    <ul>
+        <li><strong>STEP1:</strong> One start cell to green</li>
+        <li><strong>STEP2:</strong> One end cell to red</li>
+        <li><strong>STEP3:</strong> n-2 wall blocked cell to gray</li>
+    </ul>
+</body>
+</html>

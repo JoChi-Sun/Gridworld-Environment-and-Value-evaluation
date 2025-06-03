@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ n }} x {{ n }} Grid</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat({{ n }}, 50px);
+            grid-template-rows: repeat({{ n }}, 50px);
+            gap: 1px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .start {
+            background-color: green;
+        }
+        .end {
+            background-color: red;
+        }
+        .obstacle {
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>{{ n }} x {{ n }} Grid</h2>
+    <div class="grid" id="grid">
+        {% for i in range(n) %}
+            {% for j in range(n) %}
+                <div class="cell" data-x="{{ i }}" data-y="{{ j }}" onclick="cellClick(event)">
+                    {{ i * n + j + 1 }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <p>Click on a cell to set:</p>
+    <ul>
+        <li><strong>STEP1:</strong> One start cell to green</li>
+        <li><strong>STEP2:</strong> One end cell to red</li>
+        <li><strong>STEP3:</strong> n-2 wall blocked cell to gray</li>
+    </ul>
+
+    <script>
+        let startCell = null;
+        let endCell = null;
+        let obstacles = 0;
+
+        function cellClick(event) {
+            const cell = event.target;
+            const x = parseInt(cell.getAttribute('data-x'));
+            const y = parseInt(cell.getAttribute('data-y'));
+
+            if (!startCell) {
+                startCell = cell;
+                cell.classList.add('start');
+            } else if (!endCell) {
+                endCell = cell;
+                cell.classList.add('end');
+            } else if (obstacles < {{ n }} - 2) {
+                cell.classList.add('obstacle');
+                obstacles++;
+            }
+
+            // Prevent starting and ending cells from being obstacles
+            if (cell === startCell || cell === endCell) {
+                cell.classList.remove('obstacle');
+            }
+        }
+    </script>
+
+</body>
+</html>
