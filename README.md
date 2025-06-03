@@ -16,12 +16,14 @@ the layout configuration as follows,
 4. the cell width and height is 50px. 
 5. the border size is 1px.
 6. the cell label is number and aligned center.  
-7.Project Directory Structure: 
+7. Project Directory Structure: 
+```
 project/
-├── app.py(Flask 後端)
+├── app.py
 ├── templates/
-│   ├── index.html(用戶輸入 n 的頁面)
-      └── square.html (顯示 n x n 網格並處理點擊事件)
+│   ├── index.html
+│   └── square.html
+```
 
 ## Response:
 Here is the code to implement your Flask web application:
